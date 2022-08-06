@@ -10,5 +10,6 @@
    :maxdepth: 3
    :titlesonly:
 
+   compile/index
    misc/index
 
