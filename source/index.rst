@@ -7,9 +7,26 @@
 ==========================================
 
 .. toctree::
-   :maxdepth: 3
+   :caption: 内核配置
    :titlesonly:
+   :maxdepth: 1
+   :glob:
 
    compile/index
+
+.. toctree::
+   :caption: 功能支持
+   :titlesonly:
+   :maxdepth: 1
+   :glob:
+
+   module/index
+
+.. toctree::
+   :caption: 百草园
+   :maxdepth: 1
+   :glob:
+
    misc/index
+
 
