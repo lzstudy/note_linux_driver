@@ -5,3 +5,4 @@
    :maxdepth: 1
 
    usb-storage
+   usb-audio

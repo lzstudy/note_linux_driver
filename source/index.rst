@@ -23,6 +23,14 @@
    module/index
 
 .. toctree::
+   :caption: 内核驱动
+   :titlesonly:
+   :maxdepth: 1
+   :glob:
+
+   driver/audio/index
+
+.. toctree::
    :caption: 百草园
    :maxdepth: 1
    :glob:
