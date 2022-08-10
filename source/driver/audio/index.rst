@@ -5,3 +5,5 @@
    :maxdepth: 1
 
    alsa-utils
+   ffmpeg-utils
+   gstreamer-utils
