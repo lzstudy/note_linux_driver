@@ -23,6 +23,14 @@
    module/index
 
 .. toctree::
+   :caption: 内核子系统
+   :titlesonly:
+   :maxdepth: 1
+   :glob:
+
+   subsys/misc
+
+.. toctree::
    :caption: 内核驱动
    :titlesonly:
    :maxdepth: 1

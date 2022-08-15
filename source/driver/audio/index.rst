@@ -7,3 +7,4 @@
    alsa-utils
    ffmpeg-utils
    gstreamer-utils
+   other-utils

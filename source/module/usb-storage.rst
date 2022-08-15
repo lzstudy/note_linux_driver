@@ -9,7 +9,7 @@
    # 支持U盘驱动
    insmod scsi_mod.ko
    insmod usb-storage.ko
-   insmod sd_mode.ko
+   insmod sd_mod.ko
 
    # 支持FAT32文件系统
    insmod fat.ko
