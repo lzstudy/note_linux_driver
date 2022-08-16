@@ -23,6 +23,14 @@
    module/index
 
 .. toctree::
+   :caption: 内核编程
+   :maxdepth: 1
+   :glob:
+
+   code/sync
+   code/time
+
+.. toctree::
    :caption: 内核子系统
    :titlesonly:
    :maxdepth: 1
