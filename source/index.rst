@@ -15,12 +15,13 @@
    compile/index
 
 .. toctree::
-   :caption: 功能支持
+   :caption: 模块配置
    :titlesonly:
    :maxdepth: 1
    :glob:
 
-   module/index
+   module/usb-audio.rst
+   module/usb-storage.rst
 
 .. toctree::
    :caption: 内核编程
@@ -30,6 +31,8 @@
    code/code
    code/base
    code/sync
+   code/queue
+   code/list
    code/time
    code/attr
 

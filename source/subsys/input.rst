@@ -22,3 +22,16 @@
    #
    input_set_drvdata(input, ddata);
    input_get_drvdata(input, ddata);
+
+   input_set_capability
+
+   驱动中 dev_set_name 来直接修改驱动名称
+
+推荐源码
+--------
+
+::
+ 
+   gpio-keys.c
+   dump_reg.c
+   input.c
