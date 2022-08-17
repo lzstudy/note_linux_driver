@@ -29,20 +29,9 @@
    :glob:
 
    code/code
-   code/base
-   code/sync
-   code/queue
-   code/list
-   code/time
-   code/attr
-
-.. toctree::
-   :caption: 设备树
-   :maxdepth: 1
-   :glob:
-
-   dt/base
-   dt/irq
+   code/base/index
+   code/dt/index
+   code/driver/index
 
 .. toctree::
    :caption: 内核子系统
