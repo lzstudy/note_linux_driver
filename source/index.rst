@@ -27,6 +27,7 @@
    :maxdepth: 1
    :glob:
 
+   code/base
    code/sync
    code/time
 

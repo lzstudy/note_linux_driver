@@ -74,4 +74,24 @@
 自旋锁
 ------
 
+.. code:: c
+
+   # 定义自旋锁
+   spinlock_t lock;
+
+   # 初始化自旋锁
+   spin_lock_init(&lock);
+
+   # 使用场景 - 保存 + 恢复中断(常用)
+   unsigned long flags
+   spin_lock_irqsave(&lock, flags);
+
+   ...
+
+   spin_unlock_irqrestore(&lock, flags);
+
+.. note::
+
+   - 自旋锁会禁止处理器抢占
+   - 使用spin_lock_irqsave会同时禁止本地中断
 
