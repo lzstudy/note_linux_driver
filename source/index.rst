@@ -27,9 +27,19 @@
    :maxdepth: 1
    :glob:
 
+   code/code
    code/base
    code/sync
    code/time
+   code/attr
+
+.. toctree::
+   :caption: 设备树
+   :maxdepth: 1
+   :glob:
+
+   dt/base
+   dt/irq
 
 .. toctree::
    :caption: 内核子系统
@@ -37,6 +47,7 @@
    :maxdepth: 1
    :glob:
 
+   subsys/input
    subsys/misc
 
 .. toctree::
@@ -45,6 +56,7 @@
    :maxdepth: 1
    :glob:
 
+   driver/base/index
    driver/audio/index
 
 .. toctree::
