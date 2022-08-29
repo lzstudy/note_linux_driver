@@ -5,3 +5,5 @@
    :maxdepth: 1
 
    objdump.rst
+   backtrace.rst
+
