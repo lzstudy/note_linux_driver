@@ -1,9 +1,6 @@
-调试
+ftrace调试
 ========================================
 
 .. toctree::
    :maxdepth: 1
-
-   objdump.rst
-   backtrace.rst
 

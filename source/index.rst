@@ -7,7 +7,7 @@
 ==========================================
 
 .. toctree::
-   :caption: 内核配置
+   :caption: 内核编译
    :titlesonly:
    :maxdepth: 1
    :glob:
@@ -20,8 +20,17 @@
    :maxdepth: 1
    :glob:
 
-   module/usb-audio.rst
    module/usb-storage.rst
+   module/usb-audio.rst
+
+.. toctree::
+   :caption: 内核调试
+   :titlesonly:
+   :maxdepth: 1
+   :glob:
+
+   debug/base/index
+   debug/ftrace/index
 
 .. toctree::
    :caption: 内核编程
