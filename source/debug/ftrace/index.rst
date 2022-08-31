@@ -5,4 +5,5 @@ ftrace调试
    :maxdepth: 1
 
    ftrace
-   function_tracer
+   tracer_function
+   tracer_event

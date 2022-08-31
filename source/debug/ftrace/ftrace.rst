@@ -71,3 +71,40 @@ ftrace是内核trace子系统的一种, ftrace下又细分为function tracre、g
 
    # 挂载到tracefs下
    mount -t tracefs tracefs /sys/kernel/tracing
+
+
+4 ftrace使用流程
+----------------
+
+.. code:: c
+
+   # 1、挂载tracefs文件系统
+   mount -t tracefs tracefs /sys/kernel/tracing
+
+   # 2、关闭trace
+   echo 0 > tracing_on
+
+   # 3、设置当前要使用的tracer(这里以函数tracer为例)
+   echo function_graph > current_tracer
+
+   # 4、设置要跟踪的函数(以do_fork、init_module为例, 可以设置多个)
+   echo do_fork > set_ftrace_filter
+   echo inix_module > set_ftrace_filter
+
+   # 5、设置函数调用深度
+   echo 128 > max_graph_depth
+
+   # 6、开启trace
+   echo 1 > tracing_on
+
+   # 7、查看trace
+   cat trace          // 静态显示trace, 显示完buffer还在, echo > trace后清空buffer
+   cat trace_pipe     // 动态显示trace信息
+   snapshot           // 获取当前trace buffer备份
+   trace_marker       // 把用户层的log插入trace buffer, 实现用户和内核trace log同步
+
+
+.. note::
+
+   cat trace_pipe > /tmp/trace.out & 输出日志到文件
+
