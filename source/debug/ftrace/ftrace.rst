@@ -108,3 +108,12 @@ ftrace是内核trace子系统的一种, ftrace下又细分为function tracre、g
 
    cat trace_pipe > /tmp/trace.out & 输出日志到文件
 
+5 其他工具
+----------
+
+trace-cmd可以简化命令, 生成trace.data文件提供给 ``kernelShark`` 等UI工具解析, 实现trace的可视化
+
+trace-cmd下载git clone [https://github.com/rostedt/trace-cmd.git](https://github.com/rostedt/trace-cmd.git)
+
+使用
+./trace-cmd record -e hbpvt -e sched -e irq
