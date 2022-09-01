@@ -108,6 +108,16 @@ ftrace是内核trace子系统的一种, ftrace下又细分为function tracre、g
 
    cat trace_pipe > /tmp/trace.out & 输出日志到文件
 
+5 optioin
+---------
+
+5.1 使能函数最终支持栈回溯
+**************************
+
+.. code:: c
+
+   echo 1 > options/func_stack_trace
+
 5 其他工具
 ----------
 
