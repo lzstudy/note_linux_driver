@@ -50,6 +50,7 @@
 
    subsys/input
    subsys/misc
+   subsys/v4l2
 
 .. toctree::
    :caption: 内核驱动
@@ -59,6 +60,7 @@
 
    driver/base/index
    driver/audio/index
+   driver/v4l2/index
 
 .. toctree::
    :caption: 百草园
