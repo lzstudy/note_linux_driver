@@ -6,4 +6,5 @@ ftrace调试
 
    ftrace
    tracer_function
+   tracer_kprobe
    tracer_event

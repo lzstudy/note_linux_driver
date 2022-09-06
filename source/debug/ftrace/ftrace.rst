@@ -127,3 +127,8 @@ trace-cmd下载git clone [https://github.com/rostedt/trace-cmd.git](https://gith
 
 使用
 ./trace-cmd record -e hbpvt -e sched -e irq
+
+# 参考网站
+http://t.zoukankan.com/sky-heaven-p-5321553.html
+
+https://zhuanlan.zhihu.com/p/479833554
