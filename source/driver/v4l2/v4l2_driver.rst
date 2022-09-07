@@ -69,3 +69,81 @@ V4L2驱动分为四个部分：v4l2驱动、video驱动、subdev驱动、media�
 
    * 互斥锁一定要自己初始化
    * vin_ioctl_ops可以先实现一个vidioc_querycap来调试
+
+4 subdev驱动
+------------
+
+4.1 说明
+********
+
+* subdev提供两种方式调用, 一种是v4l2_subdev_ops, 另外可以提供设备节点到应用层, 直接操作设备节点控制
+* v4l2 subdev提供多种操作接口在 `` v4l2-subdev.h`` , 常用core, video, pad, sensor
+* 如果倾向使用media子系统, 那么使用pad_ops代替video_ops
+
+.. note::
+
+   * 使用ioctl控制subdev时，有时会返回-1, 是因为在系统架构层有提前的条件判断, 详细查看 ``v4l2-subdev.c`` 中的 ``subdev_do_ioctl`` 来查看. 关键地方结合ftrae和内核探针做判断
+
+4.2 参考逻辑
+************
+
+.. code:: c
+
+   # 1 初始化subdev
+   v4l2_subdev_init();
+
+   # 2 设置文件标志(使能此项才会生成节点)
+   sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE
+
+   # 3 注册pads
+   sd->entity.type = MEDIA_ENT_T_V4L2_SUBDEV_LENS;
+   media_entity_init(&sd->entity, 0, NULL, 0);
+
+   # 4 注册subdev
+   v4l2_device_register_subdev(v4l2_dev, &sd);
+
+   # 5 生成节点文件
+   v4l2_device_register_subdev_nodes(v4l2_dev);
+
+.. tip::
+
+   * 存取数据 ``v4l2_set_subdevdata`` , ``v4l2_get_subdevdata``
+   * 存取数据 ``v4l2_get_subdev_hostdata``, ``v4l2_set_subdev_hostdata``
+   * VIDIOC_QUERYCTRL, VIDIOC_QUERYMENU, VIDIOC_G_CTRL, VIDIOC_S_CTRL, VIDIOC_G_EXT_CTRLS, VIDIOC_S_EXT_CTRLS和 VIDIOC_TRY_EXT_CTRLS与主控操作相同, 不过会优先在subdev中处理
+
+4.3 技巧
+********
+
+* 自定义ioctl来控制subdev
+
+.. code:: c
+
+   # 自定义ioctl在core ops中
+
+   #define VIDIOC_SUBDEV_TEST		_IOWR('V', 200, subdev_test)
+
+   statuc long sd_usr_ioctl(struct v4l2_subdev *sd, unsigned int cmd, void *arg)
+   {
+       if(cmd == VIDIOC_SUBDEV_TEST)
+   }
+
+   static const struct v4l2_subdev_core_ops core_ops = {
+       .xxx = xxx.
+       .ioclt = sd_usr_ioctl,
+   };
+
+* 使用宏来调用subdev接口
+
+.. code:: c
+
+   # 调用subdev
+   err = v4l2_subdev_call(sd, core, g_std, norm);
+
+   # 通知事件
+   v4l2_subdev_notify(sd, notificaton, arg);
+
+
+
+
+
+

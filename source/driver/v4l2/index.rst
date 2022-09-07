@@ -5,5 +5,7 @@
    :maxdepth: 1
 
    v4l2_subsys
+   media_subsys
    v4l2_driver
+   v4l2_media
    v4l2_debug
