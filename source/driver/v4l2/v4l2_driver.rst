@@ -143,7 +143,28 @@ V4L2驱动分为四个部分：v4l2驱动、video驱动、subdev驱动、media�
    v4l2_subdev_notify(sd, notificaton, arg);
 
 
+5 使用media子系统
+-----------------
 
+5.1 注册顺序
+*************
+
+.. code:: c
+
+   # 1 注册V4L2设备
+   v4l2_device_register(NULL, v4l2_dev);
+
+   # 2 注册media设备
+   strcpy(md. model, "name"
+   set v4l2_dev
+   set dev
+   media_device_register(&priv->media_dev.md);
+
+   # 3 注册video
+   video_register_device
+
+   # 4 注册其他subdev
+   v4l2_device_register_subdev
 
 
 
