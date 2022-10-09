@@ -61,6 +61,7 @@
    driver/base/index
    driver/audio/index
    driver/v4l2/index
+   driver/wifi/index
 
 .. toctree::
    :caption: 百草园
