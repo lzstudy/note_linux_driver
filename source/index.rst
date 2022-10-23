@@ -63,6 +63,7 @@
    driver/v4l2/index
    driver/wifi/index
    driver/camera/index
+   driver/uart/index
 
 .. toctree::
    :caption: 百草园
