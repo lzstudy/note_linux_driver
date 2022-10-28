@@ -59,6 +59,7 @@
    :glob:
 
    driver/base/index
+   driver/dma/index
    driver/audio/index
    driver/v4l2/index
    driver/wifi/index
