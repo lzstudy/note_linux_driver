@@ -6,3 +6,4 @@
 
    base
    hardware
+   subsys
