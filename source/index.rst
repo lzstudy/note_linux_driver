@@ -5,6 +5,7 @@
    :maxdepth: 3
 
    base/index
+   debug/index
    dma/index
    uart/index
    i2c/index
