@@ -19,6 +19,14 @@
 1.3 常用术语
 ************
 
+======= ==================================== ===================
+HCD      Host controller device              控制器设备
+UDC      Usb device controller               USB设备
+OHCI     open host controller interface      开源型主机控制器接口
+UHCI     universal host controller interface 通用型主机控制器接口
+EHCI     enhanced host controller interface  增强型主机控制器接口
+======= ==================================== ===================
+
 1.4 基本特性
 *************
 
