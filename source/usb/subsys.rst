@@ -151,28 +151,99 @@ udc-core.c usb设备框架, 提供接口给设备
     # 发送可控制消息
     usb_control_msg()
 
-3 USB流程
------------
+3 USB初始化流程
+----------------
 
 USB流程包括
 
-- 初始化流程
+#. USB系统初始化流程
+#. USB host框架初始化流程(目前有些框架和host在一起初始化)
+#. USB host初始化流程
+#. USB gadget框架初始化流程
+#. USB device初始化流程
 
-2.1 USB系统初始化流程
+3.1 USB系统初始化流程
 **********************
 
-#. 初始化USB debugfs
-#. 注册USB总线
-#. 注册usbfs和device字符设备(主设备号180, 189)
-#. 初始化usb hub
+.. code-block:: c
 
-2.2 控制器hcd注册初始化流程
+    # 1 注册debugfs
+    usb_debugfs_init();
+    
+    # 2 注册总线通知, 其中usb_bus_type中实现驱动和设备匹配(很关键)
+    bus_register_notifier(&usb_bus_type, &usb_bus_nb) => usb_device_match() => usb_match_one_id()
+
+    # 3 注册设备号, 为180, 用于usbfs
+    usb_major_init() => register_chrdev(USB_MAJOR, "usb", &usb_fops); => usb_register(usbfs_driver);
+
+    # 4 为usb设备注册主设备号189, 只有纯usb设备才会用, 所以大部分场景不会用
+    usb_devio_init() => register_chrdev_region(USB_DEVICE_DEV, USB_DEVICE_MAX, "usb_device");
+
+    # 5 hub初始化, 注册hub驱动, 申请hub工作队列, 注意这里只是申请队列头, 没有具体事件
+    usb_hub_init() => usb_register(&hub_driver) => alloc_workqueue("usb_hub_wq", WQ_FREEZABLE, 0);
+
+    # 6 注册USB通用驱动, 里面实现了usb选择配置的过程, 设置配置过程中有关于带宽的设置(很重要, 建议加入ftrace调试)
+    usb_register_device_driver(&usb_generic_driver, THIS_MODULE); | generic_probe => usb_choose_configuration => usb_set_configuration
+
+3.2 USB host框架初始化流程
 *****************************
 
-#. 创建hcd设备usb_create_hcd
-#. 注册到内核usb_add_hcd
+============================== ================
+kernel/drivers/usb/dwc2/hcd.c  host框架控制接口
+drivers/usb/chipidea/host.c    host设备接口
+============================== ================
 
-2.3 设备udc注册流程(uvc)
+USB host框架使用hcd.c中得接口无需初始化
+目前并不统一, 所以有多个框架, 对应不同的目录, 并且有的框架和host是一起初始化的
+
+3.3 USB Host初始化流程
+************************
+
+============================== ================
+kernel/drivers/usb/dwc2/hcd.c  host框架控制接口
+drivers/usb/chipidea/host.c    host设备接口
+============================== ================
+
+#. dw2
+#. dw3
+#. chipidea, imx6ull用的此框架(chipidea是usb芯片公司)
+
+.. code-block:: c
+
+    # 1 获取设备信息, 初始化usb phy
+    ci_hdrc_probe => hw_device_init() => ci_usb_phy_init()
+
+    # 2 初始化中断, 判断自己是host或device
+    platform_get_irq() => ci_hdrc_host_init() / ci_hdrc_gadget_init()
+
+    # 3 host初始化
+    ci_hdrc_host_init() | ops && host_start && host_irq
+
+    # 4 初始化角色 回调3得host_start
+    ci_get_role(ci); && ci_role_start() => ci->roles[role]->start(ci) => host_start
+
+    # 5 创建HCD, 初始化urb下半部(将来usb中断从这里过 usb_giveback_urb_bh) 
+    usb_create_hcd() && usb_add_hcd() => init_giveback_urb_bh() => tasklet_init(usb_giveback_urb_bh);
+
+    # 6 注册中断
+    devm_request_irq(dev, ci->irq, ci_irq, IRQF_SHARED, ci->platdata->name, ci);
+
+    # 7 创建power任务
+    INIT_WORK(&ci->power_lost_work, ci_power_lost_work);
+
+    # 8 创建debugfs
+    ret = dbg_create_files(ci);
+
+.. note:: 
+    
+    中断函数分析:
+    ci_irq => ci_otg_fsm_irq => ci_otg_queue_work
+
+3.4 USB Gadgat框架初始化流程
+****************************
+
+
+3.5 设备udc注册流程(uvc)
 **************************
 
 .. code-block:: c
@@ -184,19 +255,26 @@ USB流程包括
     usb_register(&uvc_driver.driver) => usb_register_driver => usb_probe_interface
 
 
-2.4 插入检测流程
+4 usb事件流程
+--------------
+
+4.1 插入检测流程
 ******************
+
+============ ===========================
+hub_irq      进行bt可以分析中断生成过程
+============ ===========================
 
 .. code-block:: c
 
     # 1 触发中断
-    el1_ir1 => gic_handle_irq => usb_hcd_irq => xhci_irq => hub_irq => hub_event
+    el1_ir1 => gic_handle_irq => usb_hcd_irq => xhci_irq => hub_irq => kick_hub_wq => queue_work(hub_wq, &hub->events) => hub_event
 
     # 2 检测hub上所有的端口, 判断是哪个端口的事件
     hub_event => usb_reset_device => 循环查找hud上所有port => port_event(hub, i) => hub_port_connect_change => hub_port_connect
 
     # 3 检测出哪个端口后, 设备上电, 端口初始化, 设备进入POWER状态
-    usb_alloc_dev => USB_STATE_POWERD => hub_port_init
+    usb_alloc_dev => USB_STATE_POWERD => hub_port_init => "%s %s USB device number %d using %s\n"
     
     # 4 端口初始化, 复位, 使设备进入DEFAULT状态, 获取设备描述符, 进入地址态 BUS_STATE_ADDRESS
     hub_port_reset => hcd->driver->reset_device(hcd, udev); => usb_set_device_state(udev, USB_STATE_DEFAULT);

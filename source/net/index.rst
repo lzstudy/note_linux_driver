@@ -10,3 +10,6 @@
    subsys
    driver
    debug
+   4G/index
+   gnss/index
+
