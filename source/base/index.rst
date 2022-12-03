@@ -5,8 +5,6 @@
    :maxdepth: 1
 
    base
-   hardware
-   kconfig
-   subsys
-   driver
+   flow
    debug
+   insmod
