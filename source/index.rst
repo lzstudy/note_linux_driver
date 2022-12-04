@@ -11,30 +11,30 @@
    :maxdepth: 3
    :caption: 核心驱动
 
-   clock/index
-   pin/index
-   gpio/index
-   dma/index
+   system/clock/index
+   system/dma/index
+   system/pin/index
+   system/gpio/index
 
 .. toctree::
    :maxdepth: 3
    :caption: 低速接口
 
-   uart/index
-   i2c/index
-   spi/index
+   lsi/uart/index
+   lsi/i2c/index
+   lsi/spi/index
    
 
 .. toctree::
    :maxdepth: 3
    :caption: 高速接口
 
-   usb/index
+   hsi/usb/index
 
 .. toctree::
    :maxdepth: 3
    :caption: 驱动专题
 
-   net/index
-   camera/index
-   audio/index
+   topic/net/index
+   topic/camera/index
+   topic/audio/index

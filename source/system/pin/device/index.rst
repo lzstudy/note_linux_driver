@@ -1,12 +1,16 @@
-驱动 - PIN
+设备领域
 ========================================
 
 .. toctree::
    :maxdepth: 1
 
    base
+   subsys
+   flow
    hardware
    kconfig
-   subsys
+   dts
+   api
    driver
    debug
+   sample

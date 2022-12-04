@@ -1,12 +1,15 @@
-驱动 - 时钟
+总线领域
 ========================================
 
 .. toctree::
    :maxdepth: 1
 
    base
+   subsys
+   flow
    hardware
    kconfig
-   subsys
+   dts
+   api
    driver
    debug
