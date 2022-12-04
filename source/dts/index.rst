@@ -1,9 +1,10 @@
-基础调试
+设备树
 ========================================
 
 .. toctree::
    :maxdepth: 1
 
-   objdump.rst
-   backtrace.rst
-   kprobe.rst
+   base
+   pin
+   gpio
+   clock
