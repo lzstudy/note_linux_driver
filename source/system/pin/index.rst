@@ -1,10 +1,10 @@
-驱动 - PIN
+驱动 - 时钟
 ========================================
 
 .. toctree::
    :maxdepth: 3
 
-   info
+   info/index
    core/index
    bus/index
    device/index

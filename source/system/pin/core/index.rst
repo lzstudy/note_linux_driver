@@ -6,8 +6,4 @@
 
    base
    subsys
-   flow
-   kconfig
-   api
-   driver
    debug

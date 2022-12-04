@@ -1,7 +1,7 @@
 子系统
 ===========
 
-1 基本介绍
+1 系统原理
 ------------
 
 linux时钟体系由三部分构成 ``common clock framework``, ``clock provider``, ``clock consumer``。
@@ -9,13 +9,10 @@ linux时钟体系由三部分构成 ``common clock framework``, ``clock provider
 .. image:: clock.jpg
 
 
-2 框架介绍
-------------
-
-2.1 common clock framework
+1.1 common clock framework
 ****************************
 
-2.2 clock provider
+1.2 clock provider
 *********************
 
 根据时钟特点, ccf将时钟抽象为 ``fixed rate``, ``gate``, ``devider``, ``mux``, ``fixed factor``, ``composite``六类
@@ -50,3 +47,6 @@ linux时钟体系由三部分构成 ``common clock framework``, ``clock provider
 
 2.3 clock consumer
 *********************
+
+2 系统流程
+------------

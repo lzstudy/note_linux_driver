@@ -6,5 +6,8 @@
 
 https://blog.csdn.net/m0_46535940/article/details/126327889
 
+2 内核配置
+-----------
+
 
 
