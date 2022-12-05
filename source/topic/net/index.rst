@@ -1,15 +1,10 @@
-驱动 - NET
+驱动 - 网络
 ========================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
 
-   base
-   hardware
-   kconfig
-   subsys
-   driver
-   debug
-   4G/index
-   gnss/index
-
+   info/index
+   core/index
+   bus/index
+   device/index

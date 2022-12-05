@@ -29,8 +29,7 @@
    :maxdepth: 1
    :glob:
 
-   debug/base/index
-   debug/ftrace/index
+
 
 .. toctree::
    :caption: 内核编程

@@ -15,10 +15,10 @@ linux时钟体系由三部分构成 ``common clock framework``, ``clock provider
 1.2 clock provider
 *********************
 
-根据时钟特点, ccf将时钟抽象为 ``fixed rate``, ``gate``, ``devider``, ``mux``, ``fixed factor``, ``composite``六类
+根据时钟特点, ccf将时钟抽象为 ``fixed rate``, ``gate``, ``devider``, ``mux``, ``fixed factor``, ``composite``
 使用数据结构clk_hw来描述
 
-.. code-block:: c
+.. code-block::
 
     struct clk_hw {
         struct clk_core *core;
@@ -50,3 +50,8 @@ linux时钟体系由三部分构成 ``common clock framework``, ``clock provider
 
 2 系统流程
 ------------
+
+============================================= =======================================
+重要文件                                      说明
+kernel/include/dt-bindings/clock/xxx-clock.h  关于时钟ID定义的头文件, 设备树中会引用
+============================================= =======================================
