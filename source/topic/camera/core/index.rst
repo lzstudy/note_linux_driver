@@ -5,5 +5,5 @@
    :maxdepth: 1
 
    base
-   subsys
+   subsys-v4l2
    debug

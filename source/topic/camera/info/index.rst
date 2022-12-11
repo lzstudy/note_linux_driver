@@ -5,4 +5,6 @@
    :maxdepth: 1
 
    base
+   csi
+   debug
    problem

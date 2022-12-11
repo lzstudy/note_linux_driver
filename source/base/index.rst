@@ -6,6 +6,7 @@
 
    base
    flow
+   make
    dts
    debug
    insmod

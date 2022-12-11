@@ -12,7 +12,6 @@
    :maxdepth: 1
    :glob:
 
-   compile/index
 
 .. toctree::
    :caption: 模块配置
@@ -65,11 +64,6 @@
    driver/camera/index
    driver/uart/index
 
-.. toctree::
-   :caption: 百草园
-   :maxdepth: 1
-   :glob:
 
-   misc/index
 
 

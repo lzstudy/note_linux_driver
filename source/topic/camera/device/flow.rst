@@ -1,32 +1,27 @@
 工作流程
 ===========
 
-1 获取并使能时钟流程
+1 驱动编写流程
 ----------------------
 
-.. code-block::
+.. code-block:: c
 
-    ############################################# 1 设备树部分
-    # 1.1 配置clocks节点, 其中CLK_I2C_ROOT是时钟唯一ID, 由厂商定义, 每个时钟都会有唯一一个ID
-    clocks = <&clk CLK_I2C_ROOT>
+    # 1 解析设备树
+    # 2 初始化摄像头
 
-    # 1.2 配置clock-names节点, 与clocks节点配合使用, 驱动中通过此标识获取到clocks
-    clock-names = "zw-i2c-clk"
+    # 3 将i2c初始化为subdev, subdev中的ops很重要, 此函数内部只是对SD进行初始化, i2c与client相互指向
+    v4l2_i2c_subdev_init(sd, i2c_client, ops);
 
-    ############################################# 2 驱动部分
-    #include <linux/clk.h>
+    # 3 注册media entity, 如果使用media子系统
+    media_entity_pads_init(sd->entity, num, &pads);
 
-    # 2.1 解析设备树时钟, 获取clk句柄
-    struct clk * devm_clk_get(dev, "zw-i2c-clk");
-
-    # 2.2 设置时钟频率
-    clk_set_rate(clk, 120000);
-
-    # 3.3 使能时钟
-    clk_prepare_enable(clk);
+    # 4 注册subdev, subdev子设备与控制器通常都是分开注册的, 
+    # 控制器接收v4l2_async_notifier来匹配子设备, 将其注册到v4l2_device统一管理
+    v4l2_async_register_subdev_sensor_common(sd);
 
 
-2 系统时钟初始化流程
------------------------
+.. note::
+    
+    sudev中的ops是核心代码, 分为三大类, ``core``, ``video``, ``pad``, 每个大类下还有数个接口需要实现
 
-时钟在内核是 ``struct clk *clks[]`` 一个大数组, 其中数组下标就是时钟的ID,
+
