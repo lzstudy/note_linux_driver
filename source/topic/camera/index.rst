@@ -8,3 +8,4 @@
    core/index
    bus/index
    device/index
+   sensor/index

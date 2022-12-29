@@ -6,4 +6,5 @@
 
    base
    subsys-v4l2
+   fps
    debug
