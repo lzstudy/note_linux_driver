@@ -6,5 +6,6 @@
 
    base
    csi
+   format
    debug
    problem
