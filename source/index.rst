@@ -18,7 +18,7 @@
 
 .. toctree::
    :maxdepth: 3
-   :caption: 低速接口
+   :caption: 低速总线
 
    lsi/uart/index
    lsi/i2c/index
@@ -27,9 +27,16 @@
 
 .. toctree::
    :maxdepth: 3
-   :caption: 高速接口
+   :caption: 高速总线
 
    hsi/usb/index
+
+.. toctree::
+   :maxdepth: 3
+   :caption: IO设备
+
+   iodev/led
+   iodev/key
 
 .. toctree::
    :maxdepth: 3
