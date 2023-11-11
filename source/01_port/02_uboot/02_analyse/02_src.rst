@@ -76,4 +76,3 @@ images          ft_addr         设备树地址(0x83000000)
               kernel_entry()        // 进入内核
 
 
-.. image:: .images/bootz.png

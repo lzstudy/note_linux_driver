@@ -18,7 +18,6 @@ Kconfig
     menu "zw menu"
     endmenu
 
-.. image:: .images/menu.png
 
 2 添加子项
 ---------------
@@ -56,7 +55,7 @@ Kconfig
         help
             this is int item
 
-.. image:: .images/item.png
+.. image:: _images/item.png
 
 3 添加choice选项
 ------------------
@@ -85,7 +84,7 @@ Kconfig
 
     endchoice
 
-.. image:: .images/choice.png
+.. image:: _images/choice.png
 
 4 选项依赖
 --------------
@@ -98,4 +97,4 @@ Kconfig
         help
             this is depend item
 
-.. image:: .images/depend.png
+.. image:: _images/depend.png

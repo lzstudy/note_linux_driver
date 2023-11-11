@@ -4,6 +4,7 @@
 .. toctree::
    :maxdepth: 5
 
-   01_uboot/index
-   02_kernel/index
-   03_rootfs/index
+   01_base/index
+   02_uboot/index
+   03_kernel/index
+   04_rootfs/index

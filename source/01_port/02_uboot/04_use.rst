@@ -182,7 +182,7 @@ uboot使用
 3 uboot中更新uboot
 -----------------------------
 
-.. code-block:: c
+.. code-block:: shell
 
     # 通过tftp将u-boot.imx下载到内存
     tftp 80800000 u-boot.imx
@@ -210,7 +210,7 @@ uboot使用
 4 uboot自动更新内核原理
 ---------------------------
 
-.. code-block:: c
+.. code-block:: shell
 
     # 设置bootcmd命令
     setenv bootcmd 'fatload mmc 0:1 80800000 zImage; fatload mmc 1:1 83000000 zw.dtb; bootz 80800000 - 83000000'

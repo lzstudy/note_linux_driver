@@ -4,7 +4,6 @@ uboot理论
 overview
 ----------------------
 
-.. image:: .images/uboot.png
 
 
 - 环境变量是放在外部flash中, 启动时读取到DRAM
