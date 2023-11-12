@@ -127,10 +127,51 @@ configs/xxx_defconfig                   默认配置
     # 4 下载测试, 观察开机打印的编译时间, 和板子名称
 
 
-3 常见问题
+3 配置加载系统
+-----------------
+
+3.1 通过设备树配置
+**************************
+
+::
+
+    修改
+
+
+3.2 配置NFS配置
+**************************
+
+    uboot中默认nfs版本是V2的, 而现在主流ubuntu的nfs版本是V3或V4, 因此需要在uboot中指定nfs版本为V3。
+    或者设置ubuntu版本支持V2, ``rpcinfo -p | grep nfs`` 可以通过此命令查看ubuntu nfs版本
+
+.. code-block:: c
+
+    # 加载内核和设备树
+    tftp 80800000 zImage
+    tftp 83000000 zw.dtb
+
+    # 加载根文件系统 - 方案1 变量形态, 会更简介
+    # boardip=192.168.31.66 serverip=192.168.31.88
+    setenv console ttymxc0
+    setenv baudrate 115200
+    setenv serverip 192.168.31.88
+    setenv nfsroot 192.168.31.88:/home/zw/linux/nfs/rootfs
+    setenv nfsip 192.168.31.66:192.168.31.88:192.31.1.1:255.255.255.0::eth0 off
+    setenv bootargs console=${console},${baudrate} root=/dev/nfs ip=${nfsip} nfsroot=${serverip}:${nfsroot},v3,tcp
+
+    # 加载根文件系统 - 方案2 nfs 可以设置IP为dhcp的, 不过不灵活, 进入系统后无法更换IP
+    setenv bootargs console=${console},${baudrate} root=/dev/nfs ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
+
+    # 加载根文件系统 - 方案3 全写形态
+    setenv bootargs console=ttymxc0,115200 root=/dev/nfs rw nfsroot=192.168.31.88:/home/zw/linux/nfs/rootfs,v3,tcp ip=192.168.31.66:192.168.31.88:192.31.1.1:255.255.255.0::eth0 off
+
+    # 启动系统
+    boot zImage - zw.dtb
+
+4 常见问题
 --------------------
 
-3.1 编译提示configs/.h
+4.1 编译提示configs/.h
 *************************
 
 .. code-block:: c
