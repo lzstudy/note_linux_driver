@@ -23,25 +23,25 @@
 
 .. code-block:: c
 
-    # 1 添加自己自己的默认配置
+    ################################### 1 添加自己的默认配置
     cd arch/arm/configs
     cp imx_v7_mfg_defconfig zwevk_defconfig
 
-    # 2 添加设备树
+    ################################### 2 添加设备树
     cd arch/arm/boot/dts
     cp imx6ull-14x14-evk.dts zwevk.dts
 
-    # 3 添加dts编译 [arch/arm/boot/dts/Makefile]
+    ################################### 3 添加dts编译 [arch/arm/boot/dts/Makefile]
     zwevk.dtb
 
-    # 4 编译测试
+    ################################### 4 编译测试
     make clean
     make zwekv_defconfig
     make -j16
 
-    # 5 移植网卡驱动等其他驱动
+    ################################### 5 移植网卡驱动等其他驱动
 
-    # 6 启动后查看编译时间
+    ################################### 6 启动后查看编译时间
     uname -a
 
 

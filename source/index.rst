@@ -5,7 +5,10 @@
    :maxdepth: 5
 
    01_port/index
-   02_core/index
-   03_hsi/index
-   04_lsi/index
-   05_topic/index
+   02_debug/index
+   03_base/index
+   04_dt/index
+   05_core/index
+   06_hsi/index
+   07_lsi/index
+   08_topic/index
