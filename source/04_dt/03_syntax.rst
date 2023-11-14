@@ -38,21 +38,25 @@ dma-ranges            空 / [child parent len]
 .. code-block:: c
 
     ################################### 1 先获取节点
-    struct device_node *nd;
-    nd = of_find_node_by_path("/soc/zwnode");
+    struct device_node *np;
+    np = of_find_node_by_path("/zwnode");
+    np = of_find_node_by_path("/soc/aips-bus@02100000/ethnernet@02188000");
 
     ################################### 2 读取节点的属性值
     /* 读取字符串类. */
     char *str;
-    ret = of_property_read_string(nd, "compatible", &str);
+    ret = of_property_read_string(np, "compatible", &str);
     CI_RET(ret < 0, ret, "read string fail");
 
     /* 读取u32数组, 这里读取10组. */
     u32 regdata[14];
-    of_property_read_u32_array(nd, "reg", regdata, 10);
+    of_property_read_u32_array(np, "reg", regdata, 10);
     of_property_read_u8_array();
     of_property_read_u16_array();
     of_property_read_u64_array();
 
-
+    /* 读取reg属性 */
+    uint32_t *addr1 = of_iomap(np, 0);
+    uint32_t *addr2 = of_iomap(np, 1);
+    uint32_t *addr3 = of_iomap(np, 2);
 
