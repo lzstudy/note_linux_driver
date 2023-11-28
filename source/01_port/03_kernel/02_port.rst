@@ -14,9 +14,11 @@
     make xxx_defconfig
     make -j16
 
-    ################################### 单独编译内核、设备树
+    ################################### 单独编译内核、设备树、模块、独立模块
     make zImage
     make dtbs
+    make moduels
+    make CONFIG_XXX M=/driver/xxx modules
 
 2 移植内核
 --------------------
